@@ -164,7 +164,6 @@ html{
     margin: 4px 16px;
     border-radius: 3px;
     max-height: 48px;
-    touch-action: none;
     /* overflow: hidden; */
     /* background-color:rgba(238, 242, 255,1); */
 
