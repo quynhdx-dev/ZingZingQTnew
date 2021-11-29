@@ -7,7 +7,7 @@
 }
 html{
     font-size:62.5%;
-    touch-action: none;
+    touch-action:pan-y pan-up pan-down;
 
 }
 .body{
