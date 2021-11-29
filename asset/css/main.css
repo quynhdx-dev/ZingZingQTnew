@@ -44,7 +44,6 @@ html{
     top:0;
     z-index: 1;
     width: 100%;
-    touch-action: none;
 }
 .header-title{
     padding: 10px;
