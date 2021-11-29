@@ -7,8 +7,6 @@
 }
 html{
     font-size:62.5%;
-    touch-action:manipulation;
-
 }
 .body{
     width: 100vw;
@@ -46,6 +44,7 @@ html{
     top:0;
     z-index: 1;
     width: 100%;
+    touch-action: none;
 }
 .header-title{
     padding: 10px;
@@ -159,6 +158,7 @@ html{
     width: 100%;
     background-color: rgba(243, 244, 246,0.5);
     z-index: -1;
+    touch-action: none;
 }
 .list-music__item{
     display: flex;
