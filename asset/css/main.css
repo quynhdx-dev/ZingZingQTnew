@@ -158,13 +158,13 @@ html{
     width: 100%;
     background-color: rgba(243, 244, 246,0.5);
     z-index: -1;
-    touch-action: none;
 }
 .list-music__item{
     display: flex;
     margin: 4px 16px;
     border-radius: 3px;
     max-height: 48px;
+    touch-action: none;
     /* overflow: hidden; */
     /* background-color:rgba(238, 242, 255,1); */
 
