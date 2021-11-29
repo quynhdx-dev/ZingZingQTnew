@@ -7,7 +7,8 @@
 }
 html{
     font-size:62.5%;
-    touch-action:pan-down;
+    touch-action: none;
+
 }
 .body{
     width: 100vw;
