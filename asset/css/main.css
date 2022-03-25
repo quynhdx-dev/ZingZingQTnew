@@ -45,6 +45,18 @@ html{
     z-index: 1;
     width: 100%;
 }
+.error{
+    display:none;
+    padding:0 12px;
+    height:30px;
+    position:absolute;
+    top:10%;
+    right:0;
+    background-color: #e0dd0c;
+    border-radius: 10px;
+    font-size: 14px;
+    overflow: hidden;
+}
 .header-title{
     padding: 10px;
     text-align: center;
@@ -74,6 +86,9 @@ html{
     font-weight: 500;
     /* animation:text linear 10s infinite; */
 }
+.jumpText span{
+    transition: color linear  0.3s;
+}
 .header-info{
     width: 100vw;
 }
@@ -83,8 +98,10 @@ html{
     display:block;
     margin:24px auto;
     border-radius: 50%;
-    box-shadow:0 0 2px 3px rgba(0,0,0,0.2);
+    /* box-shadow:0 0 2px 3px rgba(0,0,0,0.2); */
+    animation: boder-radius 3s linear infinite;
     object-fit:cover;
+    transition: all 0.3s linear;
     will-change: transform;
 }
 .header-name_song{
@@ -170,9 +187,9 @@ html{
 .list-music__item:last-child{
     padding-bottom: 5px;
 }
-.item-img-active{
+/* .item-img-active{
    
-}
+} */
 .item-img{
     width: 40px;
     border: 1px solid rgba(229, 231, 235,1);
@@ -261,6 +278,9 @@ html{
         font-size: 1.6rem;
         color:rgb(31, 22, 22);
     }
+    .error{
+        top:15%;
+    }
     .main-list-music{
         top:65%;
     }
@@ -348,35 +368,38 @@ html{
 }
 @keyframes icon{
     0%{
-        color:rgb(63, 177, 34);
+        color:rgba(24, 23, 23, 0.267);
     }
     25%{
-        color:rgb(34, 177, 134);
+        color:rgb(19, 19, 18);
     }
     50%{
-        color:rgb(52, 27, 194);
+        color:rgba(17, 17, 16, 0.678);
         
     }
     75%{
-        color:rgb(214, 28, 59);
+        color:rgba(214, 28, 59, 0.795);
     }
     100%{
-        color:rgb(28, 152, 173);
+        color:rgba(236, 22, 218, 0.61);
 
     }
 }
-@keyframes text{
+@keyframes boder-radius{
         0%{
-           transform: translateY(-50%) scale(0.2);
-           color:rgba(230, 13, 13, 0.849);
+            box-shadow:0 0 0px 0px rgba(0,0,0,0.3);
+        }
+        25%{
+            box-shadow:0 0 10px 15px rgba(0,0,0,0.2);
+            
         }
         50%{
-            transform: translateY(0%) scale(0.5);
-            color:rgb(51, 45, 45);
+            box-shadow:0 0 15px 20px rgba(0,0,0,0.15);
+        }
+        75%{
+            box-shadow:0 0 30px 30px rgba(0,0,0,0.15);
         }
         100%{
-            transform: translateY(50%) scale(1);
-            /* color:#e0dd0c; */
-            color: rgba(243, 243, 235, 0.87);
+            box-shadow:0 0 40px 50px rgba(0,0,0,0.1);
         }
 }

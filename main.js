@@ -18,6 +18,7 @@ const boxclose=$(".box-close");
  const cdwith=cd.offsetWidth;
  const cdheigth=cd.offsetHeight;
  const a=Math.floor(Math.random()*20);
+ let txt,dem,dem1=0;
 //  const currentindex=1; vẫn được
  const app={
      currentindex: a,
@@ -146,13 +147,13 @@ const boxclose=$(".box-close");
             name:"Hơn Cả Yêu",
             singer:"Tăng Phúc",
             img:"https://youthvoicescount.org/wp-content/uploads/2020/03/ava-nhac.jpg",
-            link:"https://tainhacmienphi.biz/get/song/api/131276"
+            link:"https://data3.chiasenhac.com/downloads/2098/5/2097042-21ed29ac/128/Hon%20Ca%20Yeu%20-%20Nguyen%20Duc%20Phuc.mp3"
         },
         {
             name:"Tình Sầu Thiên Thu Muôn Lối",
             singer:"Doãn Hiếu",
             img:"https://lamhoangmedia.com/wp-content/uploads/2021/04/tinh-sau-thien-thu-muon-loi.jpeg",
-            link:"https://tainhacmienphi.biz/get/song/api/131431"
+            link:"https://tainhac123.com/listen/tinh-sau-thien-thu-muon-loi-wrc-remix-doan-hieu.nPCsD2VOzOmG.html"
         },
         {
             name:"Cô Bé Mùa Đông",
@@ -188,7 +189,7 @@ const boxclose=$(".box-close");
             name:"Trứng Dán Cần Mỡ",
             singer:"Tân Trần",
             img:"https://avatar-ex-swe.nixcdn.com/song/share/2020/03/10/b/7/d/6/1583822739243.jpg",
-            link:"https://tainhacmienphi.biz/get/song/api/135647"
+            link:"https://tainhac123.com/listen/trung-ran-can-mo-tan-tran.kCWo6P4qqvKZ.html"
         },
         {
             name:"Nếu Một Ngày Ta Chán Nhau",
@@ -218,7 +219,7 @@ const boxclose=$(".box-close");
             name:"Muốn Gặp Em x3 (想見你想見你想見你)",
             singer:"831",
             img:"https://i.ytimg.com/vi/QJWNrvoEscQ/maxresdefault.jpg",
-            link:"https://tainhacmienphi.biz/get/song/api/134729"
+            link:"https://data3.chiasenhac.com/downloads/2126/5/2125416-bb45f366/128/Muon%20Gap%20Em%20Muon%20Gap%20Em%20Muon%20Gap%20Em%20-%2083.mp3"
         },
         {
             name:"Yêu Giang Sơn Càng Yêu Mỹ Nhân",
@@ -274,7 +275,26 @@ const boxclose=$(".box-close");
             img:"https://i.ytimg.com/vi/U7vjBqQfoqI/maxresdefault.jpg",
             link:"https://tainhacmienphi.biz/get/song/api/303513"
         },
+        {
+        
+            name:"chắc anh có yêu em",
+            singer:"Khải Đăng; Ribi Sachi",
+            img:"https://i.scdn.co/image/ab67616d0000b273c0c76753ebae12b10f9fb07e",
+            link:"https://data.chiasenhac.com/down2/2226/5/2225622-13bc64fb/128/Chac%20Anh%20Co%20Yeu%20Em%20-%20Khai%20Dang_%20Ribi%20Sac.mp3"
+        },
+        {
+            name:"Muôn kiếp là anh em",
+            singer:"Du Thiên",
+            img:"https://i.scdn.co/image/ab67616d0000b2734e74fb4f614cc82ae93f8972",
+            link:"https://tainhac123.com/listen/muon-kiep-la-anh-em-du-thien.wI88Ut9oJ2Qa.html"
+        },
      ],
+     so_sanh(x,y){
+        return x.name.localeCompare(y.name);
+     },
+     sort_music(){
+        this.songs.sort(this.so_sanh);
+     },
      Render(){
          const htmls=this.songs.map((song,index) =>{
                 return`
@@ -372,6 +392,21 @@ const boxclose=$(".box-close");
             cdmade.play();
             _this.runJumpText();
         }
+        audio.onerror=function(){
+            let error=document.querySelector('.error');
+            error.innerHTML=`<marquee scrollamount='6' width="100% class="error-description">
+            link nhạc đang bị lỗi ,xin vui lòng chọn bài khác hoặc chế độ random bài được thực hiện.</marquee>`;
+            let marquee=document.querySelector('marquee');
+            marquee.style.lineHeight="30px";
+            error.style.display ='inline-block';
+            setTimeout(function(){
+                _this.randommusic();
+                _this.loadcurrentsong();
+                audio.play();
+                error.style.display="none";
+                error.innerHTML='';
+            },10000)
+        }
         audio.onpause=function(){
             cdmade.pause();
             _this.pauseText();
@@ -449,6 +484,8 @@ const boxclose=$(".box-close");
         return`0${minutes}:${second.toString=second<10 ?'0'+second:second}`;
     },
     loadcurrentsong(){
+        clearInterval(txt);
+        dem1=0;
         // header.textContent=this.currentsong.name.toUpperCase();
         header.innerText=''
         header.appendChild(this.jumpText());
@@ -465,7 +502,7 @@ const boxclose=$(".box-close");
         setTimeout(() => {
             active[this.currentindex].scrollIntoView({
                 behavior: "smooth", 
-                block: "nearest", 
+                block: "center", 
             });  
         }, 300);
     },
@@ -483,33 +520,47 @@ const boxclose=$(".box-close");
     },
      runJumpText(){
         const text=document.querySelectorAll('.jumpText span');
-        var dem=1;
-        var dem1=text.length;
-        for(var i=0;i<text.length;i++){
+        dem=dem1;
+        for(let i=0;i<text.length;i++){
             if(text[i].innerHTML==" "){
                 text[i].innerHTML='&nbsp;';
             }
             text[i].style.display="inline-block";
-            text[i].style.animation = `text linear ${dem1=dem1-1.5}s ${dem=dem+0.5}s infinite `;
         }
+        txt=setInterval(function(){
+            if(dem==0){
+                text[text.length-1].style.color='#000';
+                text[text.length-1].style.textShadow='none';
+            }
+            for(let z=0;z<dem;z++){
+                text[z].style.color='#000';
+                text[z].style.textShadow='none';
+            }
+            if(text[dem].innerHTML=="&nbsp;"){
+                dem++;
+            }
+            text[dem].style.color='#fff';
+            text[dem].style.textShadow='#fff 0.1em 0.1em 0.2em';
+            dem++;
+            if(dem>=text.length){
+                text[dem-1].style.color='#fff';
+                text[dem-1].style.textShadow='#fff 0.1em 0.1em 0.2em';
+                dem=0;
+            }
+        },1000)
      },
+     
      pauseText(){
         const text=document.querySelectorAll('.jumpText span');
-        for(var i=0;i<text.length;i++){
-            if(text[i].innerHTML==" "){
-                text[i].innerHTML='&nbsp;';
-            }
-            text[i].style.display="inline-block";
-            text[i].style.animation = 'pause'
-        }
+        dem1=dem;
+        clearInterval(txt);
      },
      start(){
+         this.sort_music();
          this.defindproperties();
          this.Render();
-        //  this.loadcurrentsong();
          this.handlevent();
          this.loadcurrentsong();
-        //  this.jumpText();
      }
 }
 app.start();
